@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>高橋一生とおしゃべりcafe</h1>
+
+    <div class="balloon_l">
+        <div class="faceicon">
+            <img src="image/zibun.png" alt="zibun">
+        </div>
+        <div>
+            <p id="says1"></p>
+        </div>
+    </div>
+    <div class="balloon_r">
+        <div class="faceicon">
+            <img src="image/issei.png" alt="issei">
+        </div>
+        <div>
+            <p id="says2"></p>
+        </div>
+    </div>
+
+    <input id="talkapi__input" type="input" placeholder="ここにテキストを入力" />
+    <button id="talkapi__request" type="button">おしゃべり♥</button>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script>/*---------------------------------------*/
+        /* HTML(だけ)の読み込みが完了したら */
+        /*---------------------------------------*/
+        window.addEventListener('DOMContentLoaded', () => {
+            //- イベントリスナー登録
+            document.getElementById('talkapi__request').addEventListener('click', handler_request_reply);
+        });
+
+        /*---------------------------------------*/
+        /* 返答をリクエスト */
+        /*---------------------------------------*/
+        function handler_request_reply(ev) {
+            /*---------------------------------------*/
+            /* コメント取得 */
+            /*---------------------------------------*/
+            const comment = document.getElementById('talkapi__input').value;
+
+            /*---------------------------------------*/
+            /* レクエストデータ */
+            /*---------------------------------------*/
+            let formdata = new FormData();
+            //- apikeyパラメーター 
+            formdata.append('apikey', 'DZZkjdC7W4xPJDaAdH2FTW06z6wsgThD');
+            //- コメント
+            formdata.append('query', comment);
+
+            /*---------------------------------------*/
+            /* リクエスト */
+            /*---------------------------------------*/
+            fetch('https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk', {
+                method: 'post',
+                body: formdata,
+            }).then(response => {
+                //- レスポンス取得
+                response.json().then(data => {
+                    console.log(data);
+                    //- 返答取得
+                    const reply = data.results[0].reply;
+                    //- 出力
+                    document.getElementById('says2').innerHTML = reply;
+                    document.getElementById('says1').innerHTML = comment;
+                });
+            });
+
+        }
+
+    </script>
+</body>
+
+</html>
