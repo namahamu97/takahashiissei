@@ -1,0 +1,93 @@
+body{
+    background-color: rgb(207, 207, 207);
+    background-image: url("image/haikei.JPG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+p{
+    font-size: 20px;
+    color: white;
+    font-family: serif;
+}
+h1{
+    text-align: center;
+    font-size: 30px;
+    font-family: serif;
+    background-color: rgba(255, 255, 255, 0.644);
+}
+button{
+position: fixed;
+bottom: 20px;
+right: 10px;
+padding: 8px;
+}
+
+input{
+    position: fixed;
+    bottom: 20px;
+    text-align: left;
+    width: 210px;
+    padding: 10px;
+}
+
+.balloon_l,.balloon_r{
+  margin: 10px 0;
+  display:flex;
+  justify-content: flex-start;
+align-items: center;
+}
+.balloon_r{
+  justify-content:flex-end;
+}
+
+.faceicon img{
+  width: 100px; /*任意のサイズ*/
+  height: auto;
+}
+.balloon_r .faceicon{
+  margin-left:25px;
+}
+.balloon_l .faceicon{
+  margin-right:25px;
+}
+.balloon_r .faceicon{
+  order:2 !important;
+}
+
+#says1,#says2 { 
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  padding: 17px 13px 15px 18px;
+  border-radius: 12px;
+  background: #035025fd;/*色は任意*/
+  box-sizing:border-box;
+  margin:0 !important;
+  line-height:1.5;
+  max-width: 200px;
+/*   align-items: center; */
+}
+
+
+#says1:after {
+  content: "";
+  position: absolute;
+  border: 10px solid transparent;
+}
+
+#says2:after {
+  content: "";
+  position: absolute;
+  border: 10px solid transparent;
+}
+
+.balloon_l #says1:after {
+  left: -26px;
+  border-right: 22px solid #035025fd;
+}
+.balloon_r #says2:after {
+  right: -26px;
+  border-left: 22px solid#035025fd ;
+}
